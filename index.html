@@ -3,148 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>6 Months with yene እማቲ</title>
+    <title>6 Months: My Life with yene እማቲ</title>
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        :root { --pink: #ff4d6d; --dark-pink: #c9184a; --soft-pink: #fff0f3; }
+        body { margin: 0; background: var(--soft-pink); font-family: 'Georgia', serif; color: #333; overflow-x: hidden; }
+        
+        section {
             min-height: 100vh;
-            background: #ffecf2; /* Soft pink */
-            font-family: 'Arial', sans-serif;
-            overflow: hidden;
-            text-align: center;
-        }
-
-        .container {
-            background: white;
-            padding: 40px;
-            border-radius: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            width: 90%;
-            max-width: 400px;
-            z-index: 10;
-        }
-
-        h1 { color: #ff4d6d; font-size: 1.6rem; margin-bottom: 10px; }
-        p { color: #555; line-height: 1.5; font-size: 1.1rem; }
-
-        .btn-wrapper {
-            margin-top: 30px;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            gap: 20px;
-            min-height: 60px; /* Prevents layout collapse */
+            padding: 60px 20px;
+            box-sizing: border-box;
+        }
+
+        .card {
+            background: white;
+            padding: 50px 30px;
+            border-radius: 30px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 700px;
+            border: 1px solid #ffe5ec;
             position: relative;
         }
 
+        h1 { color: var(--pink); font-family: 'Arial', sans-serif; font-size: 2rem; margin-bottom: 30px; }
+        
+        .essay-content {
+            text-align: left;
+            line-height: 2.2;
+            font-size: 1.2rem;
+            color: #444;
+            white-space: pre-line;
+        }
+
+        .highlight { color: var(--pink); font-weight: bold; }
+        .hidden { display: none; }
+        
         button {
-            padding: 12px 25px;
-            font-size: 1.1rem;
+            padding: 20px 40px;
+            font-size: 1.2rem;
             font-weight: bold;
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            transition: transform 0.2s;
-        }
-
-        #yesBtn {
-            background-color: #ff4d6d;
+            margin-top: 40px;
+            background: var(--pink);
             color: white;
-            z-index: 5;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3);
+            transition: 0.3s;
         }
 
-        #noBtn {
-            background-color: #adb5bd;
-            color: white;
-            position: relative; /* Starts next to Yes */
-            z-index: 5;
-        }
+        button:hover { background: var(--dark-pink); transform: translateY(-3px); }
 
-        .hidden { display: none; }
+        #noBtn { background: #adb5bd; position: relative; }
 
-        .video-container {
-            margin-top: 20px;
-            width: 100%;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        /* Falling Hearts */
-        .heart {
-            position: fixed;
-            top: -10%;
-            font-size: 24px;
-            animation: fall linear forwards;
-            z-index: 1;
-        }
+        .video-box { width: 100%; border-radius: 20px; overflow: hidden; margin-top: 25px; border: 8px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        
+        .heart { position: fixed; top: -10%; font-size: 24px; animation: fall linear forwards; z-index: 100; }
         @keyframes fall { to { transform: translateY(110vh); } }
     </style>
 </head>
 <body>
 
-    <div class="container" id="mainCard">
-        <div id="askSection">
-            <h1>Happy 6 Months, yene እማቲ! ❤️</h1>
-            <p>You are the prettiest girl ever and you deserve the whole world. I love you more than words can say.</p>
-            <p><strong>So, will you marry me?</strong></p>
-            
-            <div class="btn-wrapper">
-                <button id="yesBtn" onclick="celebrate()">YES!</button>
-                <button id="noBtn" onmouseover="dodgeNo()" ontouchstart="dodgeNo()">NO</button>
+    <section id="page1">
+        <div class="card">
+            <h1>My Dearest yene እማቲ... ❤️</h1>
+            <div class="essay-content">
+                I’ve been trying to find a way to tell you everything that’s been in my heart for these past 6 months, but a simple text or a phone call just didn't feel like enough. I needed to build something that could actually hold the weight of how much I love you. 
+
+                <span class="highlight">I thank God everyday because of you.</span> I’m not just saying that—I mean it from the bottom of my soul. I truly believe that He looked down and saw I needed a light in my life, and He gave me you. You are a God-fearing woman, and your faith is the most beautiful thing about you (well, besides that forehead!). Seeing how you love God makes me want to be a better man every single day. 
+
+                You are the best thing that happened to me this year. Actually, scratch that—you’re the best thing that’s happened to me in my entire life. I love your weirdness, your random energy, and your absolute craziness. You’re the only person who can match my vibe and still keep me grounded. You are everything I prayed for in a girl and so much more that I didn't even know I needed.
+
+                Let’s talk about your beauty for a second. You are beautiful in ways that I honestly can't express with words. I look at those <span class="highlight">big, stunning eyes</span> of yours and I’m just gone. Every time you give me that <span class="highlight">gorgeous smile</span>, my heart literally skips a beat. But since we’re being honest... I also love that <span class="highlight">big ass nose</span> of yours and that <span class="highlight">massive legendary forehead</span>! 😂 I honestly think our kids are going to need extra large hats, but it’s okay because they’ll have your beautiful heart (and hopefully my "other" features). 
+
+                You have made me feel loved in a way that is so pure and so deep. I will forever cherish the memories we’ve made in just half a year. But 6 months isn't enough. I want the next 60 years. I want to wake up every morning to that smile, even when you're grumpy and your forehead is taking up half the room. I want to build a life with you, grow old with you, and thank God for you every single day until my last breath.
+
+                I know you probably had to use a dictionary for half of this because the English is a little hard for you, <span class="highlight">የኔ social dumbass</span>! But don't worry about the words—just feel the love behind them. You are my world, my answered prayer, and my future. 
+
+                Please don't ever leave me. I don’t even want to imagine a world where you aren't by my side. I love you more than life itself.
+            </div>
+            <button onclick="showPage(2)">Click here, I'm not done...</button>
+        </div>
+    </section>
+
+    <section id="page2" class="hidden">
+        <div class="card">
+            <h1>Wait, there's more... 🛠️</h1>
+            <p style="font-size: 1.3rem; line-height: 1.8;">
+                I know I'm not a computer genius or a pro coder, but I wanted to do something that showed you I’m willing to put in the work for you. I spent hours sitting at this screen, writing this code, and making sure every heart and every word was perfect. 
+            </p>
+            <p style="font-size: 1.3rem; line-height: 1.8;">
+                It’s not just a website. It’s a promise that I will always go the extra mile to make you smile. I know it’s "nothing" compared to what you deserve, but I worked hard on this for my queen. 
+            </p>
+            <button onclick="showPage(3)">One last thing...</button>
+        </div>
+    </section>
+
+    <section id="page3" class="hidden">
+        <div class="card">
+            <h1 style="font-size: 3rem;">Will you marry me? 💍</h1>
+            <p style="font-size: 1.2rem;">(Choose carefully, yene social dumbass...)</p>
+            <div style="height: 150px; display: flex; justify-content: center; align-items: center; gap: 30px; position: relative;">
+                <button id="yesBtn" onclick="showFinal()">YES! ❤️</button>
+                <button id="noBtn" onmouseover="dodge()" ontouchstart="dodge()">NO</button>
             </div>
         </div>
+    </section>
 
-        <div id="successSection" class="hidden">
-            <h1 style="font-size: 2rem;">YAY! 💍🥰</h1>
-            <p>I can't wait for our forever!</p>
-            <div class="video-container">
-                <video id="myVideo" width="100%" controls>
+    <section id="page4" class="hidden">
+        <div class="card">
+            <h1>I KNEW IT! 🥰🎉</h1>
+            <p>You’re stuck with me forever now. I love you so much!</p>
+            <div class="video-box">
+                <video id="mainVideo" width="100%" controls>
                     <source src="video.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>
+            <p style="margin-top:20px; font-style: italic; color: var(--pink);">Happy 6-month Anniversary, my beautiful world.</p>
         </div>
-    </div>
+    </section>
 
     <script>
-        function dodgeNo() {
-            const noBtn = document.getElementById('noBtn');
-            // Change position to absolute so it can move anywhere on the screen
-            noBtn.style.position = 'fixed';
-            
-            // Calculate a random spot on the screen
-            const maxX = window.innerWidth - noBtn.offsetWidth;
-            const maxY = window.innerHeight - noBtn.offsetHeight;
-            
-            const randomX = Math.floor(Math.random() * maxX);
-            const randomY = Math.floor(Math.random() * maxY);
-            
-            noBtn.style.left = randomX + 'px';
-            noBtn.style.top = randomY + 'px';
+        function showPage(num) {
+            document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
+            const next = document.getElementById('page' + num);
+            next.classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function celebrate() {
-            document.getElementById('askSection').classList.add('hidden');
-            document.getElementById('successSection').classList.remove('hidden');
-            
-            const video = document.getElementById('myVideo');
-            video.play();
+        function dodge() {
+            const btn = document.getElementById('noBtn');
+            btn.style.position = 'fixed';
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
 
-            // Create heart rain
-            setInterval(createHeart, 200);
+        function showFinal() {
+            showPage(4);
+            const v = document.getElementById('mainVideo');
+            v.play();
+            setInterval(createHeart, 150);
         }
 
         function createHeart() {
             const heart = document.createElement('div');
             heart.classList.add('heart');
-            heart.innerHTML = '❤️';
+            heart.innerHTML = ['❤️','💖','✨','💕'][Math.floor(Math.random()*4)];
             heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+            heart.style.animationDuration = (Math.random() * 2 + 2) + 's';
             document.body.appendChild(heart);
             setTimeout(() => heart.remove(), 4000);
         }
