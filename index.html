@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6 Months with yene እማቲ</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #ffecf2; /* Soft pink */
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            width: 90%;
+            max-width: 400px;
+            z-index: 10;
+        }
+
+        h1 { color: #ff4d6d; font-size: 1.6rem; margin-bottom: 10px; }
+        p { color: #555; line-height: 1.5; font-size: 1.1rem; }
+
+        .btn-wrapper {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            min-height: 60px; /* Prevents layout collapse */
+            position: relative;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        #yesBtn {
+            background-color: #ff4d6d;
+            color: white;
+            z-index: 5;
+        }
+
+        #noBtn {
+            background-color: #adb5bd;
+            color: white;
+            position: relative; /* Starts next to Yes */
+            z-index: 5;
+        }
+
+        .hidden { display: none; }
+
+        .video-container {
+            margin-top: 20px;
+            width: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Falling Hearts */
+        .heart {
+            position: fixed;
+            top: -10%;
+            font-size: 24px;
+            animation: fall linear forwards;
+            z-index: 1;
+        }
+        @keyframes fall { to { transform: translateY(110vh); } }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="mainCard">
+        <div id="askSection">
+            <h1>Happy 6 Months, yene እማቲ! ❤️</h1>
+            <p>You are the prettiest girl ever and you deserve the whole world. I love you more than words can say.</p>
+            <p><strong>So, will you marry me?</strong></p>
+            
+            <div class="btn-wrapper">
+                <button id="yesBtn" onclick="celebrate()">YES!</button>
+                <button id="noBtn" onmouseover="dodgeNo()" ontouchstart="dodgeNo()">NO</button>
+            </div>
+        </div>
+
+        <div id="successSection" class="hidden">
+            <h1 style="font-size: 2rem;">YAY! 💍🥰</h1>
+            <p>I can't wait for our forever!</p>
+            <div class="video-container">
+                <video id="myVideo" width="100%" controls>
+                    <source src="video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function dodgeNo() {
+            const noBtn = document.getElementById('noBtn');
+            // Change position to absolute so it can move anywhere on the screen
+            noBtn.style.position = 'fixed';
+            
+            // Calculate a random spot on the screen
+            const maxX = window.innerWidth - noBtn.offsetWidth;
+            const maxY = window.innerHeight - noBtn.offsetHeight;
+            
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+            
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        }
+
+        function celebrate() {
+            document.getElementById('askSection').classList.add('hidden');
+            document.getElementById('successSection').classList.remove('hidden');
+            
+            const video = document.getElementById('myVideo');
+            video.play();
+
+            // Create heart rain
+            setInterval(createHeart, 200);
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 4000);
+        }
+    </script>
+</body>
+</html>
