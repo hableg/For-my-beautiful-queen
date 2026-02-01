@@ -3,112 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>6 Months: My Life with yene እማቲ</title>
+    <title>6 Months with yene እማቲ</title>
     <style>
-        :root { --pink: #ff4d6d; --dark-pink: #c9184a; --soft-pink: #fff0f3; }
-        body { margin: 0; background: var(--soft-pink); font-family: 'Georgia', serif; color: #333; overflow-x: hidden; }
+        :root { --pink: #ff4d6d; --dark-pink: #c9184a; --soft-pink: #fff0f3; --gold: #d4af37; }
+        body { margin: 0; background: var(--soft-pink); font-family: 'Georgia', serif; color: #333; transition: 0.5s; text-align: center; overflow-x: hidden; }
         
-        section {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 60px 20px;
-            box-sizing: border-box;
-        }
+        body.night-mode { background: #2d0014; color: #ffb3c1; }
+        body.night-mode .card { background: #4a0021; color: #ffe5ec; border: 1px solid var(--pink); box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
 
-        .card {
-            background: white;
-            padding: 50px 30px;
-            border-radius: 30px;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 700px;
-            border: 1px solid #ffe5ec;
-            position: relative;
-        }
-
-        h1 { color: var(--pink); font-family: 'Arial', sans-serif; font-size: 2rem; margin-bottom: 30px; }
+        section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 40px 20px; box-sizing: border-box; }
+        .card { background: white; padding: 40px 25px; border-radius: 30px; box-shadow: 0 15px 50px rgba(0,0,0,0.1); width: 100%; max-width: 700px; transition: 0.5s; }
         
-        .essay-content {
-            text-align: left;
-            line-height: 2.2;
-            font-size: 1.2rem;
-            color: #444;
-            white-space: pre-line;
-        }
-
+        .essay-content { text-align: left; line-height: 2.2; font-size: 1.2rem; white-space: pre-line; margin-top: 20px; }
         .highlight { color: var(--pink); font-weight: bold; }
         .hidden { display: none; }
-        
-        button {
-            padding: 20px 40px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            margin-top: 40px;
-            background: var(--pink);
-            color: white;
-            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3);
-            transition: 0.3s;
+
+        #timer { border: 2px dashed var(--pink); padding: 15px; border-radius: 15px; margin-bottom: 25px; }
+        .timer-num { font-size: 1.3rem; font-weight: bold; color: var(--dark-pink); }
+
+        /* Voice/Heart Pulse Feature */
+        .pulse-container { margin: 20px 0; }
+        .beating-heart { font-size: 50px; color: var(--pink); display: inline-block; cursor: pointer; transition: 0.3s; }
+        .is-beating { animation: beat 0.8s infinite; }
+        @keyframes beat {
+            0% { transform: scale(1); }
+            30% { transform: scale(1.3); }
+            50% { transform: scale(1.1); }
+            70% { transform: scale(1.4); }
+            100% { transform: scale(1); }
         }
 
-        button:hover { background: var(--dark-pink); transform: translateY(-3px); }
-
-        #noBtn { background: #adb5bd; position: relative; }
-
-        .video-box { width: 100%; border-radius: 20px; overflow: hidden; margin-top: 25px; border: 8px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .gallery { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin: 25px 0; }
+        .polaroid { background: white; padding: 10px 10px 25px 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transform: rotate(-3deg); width: 130px; transition: 0.3s; color: #333; }
+        .polaroid img { width: 100%; height: 130px; object-fit: cover; }
         
-        .heart { position: fixed; top: -10%; font-size: 24px; animation: fall linear forwards; z-index: 100; }
+        #snippet-display { min-height: 60px; padding: 15px; margin: 15px 0; color: var(--dark-pink); font-weight: bold; font-style: italic; background: #fff5f7; border-left: 5px solid var(--pink); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+        .heart-grid { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        .heart-btn { background: var(--pink); color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; }
+
+        button { padding: 18px 35px; font-size: 1.1rem; font-weight: bold; border: none; border-radius: 50px; cursor: pointer; margin: 10px; background: var(--pink); color: white; transition: 0.3s; }
+        #noBtn { background: #adb5bd; position: relative; }
+        .mode-toggle { position: fixed; top: 15px; right: 15px; z-index: 1000; background: var(--gold); padding: 10px 20px; font-size: 0.8rem; border-radius: 50px; }
+
+        .heart-anim { position: fixed; top: -10%; font-size: 24px; animation: fall linear forwards; z-index: 100; }
         @keyframes fall { to { transform: translateY(110vh); } }
     </style>
 </head>
 <body>
 
+    <button class="mode-toggle" onclick="toggleMode()">✨ Toggle Night Mode</button>
+
+    <audio id="voiceNote" loop>
+        <source src="iloveyou.mp4" type="audio/mp4">
+    </audio>
+
     <section id="page1">
         <div class="card">
-            <h1>My Dearest yene እማቲ... ❤️</h1>
-            <div class="essay-content">
-                I’ve been trying to find a way to tell you everything that’s been in my heart for these past 6 months, but a simple text or a phone call just didn't feel like enough. I needed to build something that could actually hold the weight of how much I love you. 
-
-                <span class="highlight">I thank God everyday because of you.</span> I’m not just saying that I mean it from the bottom of my soul. I truly believe that He looked down and saw I needed a light in my life, and He gave me you. You are a God-fearing woman, and your faith is the most beautiful thing about you (well, besides that forehead!). Seeing how you love God makes me want to be a better man every single day. 
-
-                You are the best thing that happened to me this year. Actually, scratch that you’re the best thing that’s happened to me in my entire life. I love your weirdness, your random energy, and your absolute craziness. You’re the only person who can match my vibe and still keep me grounded. You are everything I prayed for in a girl and so much more that I didn't even know I needed.
-
-                Let’s talk about your beauty for a second. You are beautiful in ways that I honestly can't express with words. I look at those <span class="highlight">big, stunning eyes</span> of yours and I’m just gone. Every time you give me that <span class="highlight">gorgeous smile</span>, my heart literally skips a beat. But since we’re being honest... I also love that <span class="highlight">big ass nose</span> of yours and that <span class="highlight">massive legendary forehead</span>! 😂 I honestly think our kids are going to need extra large hats, but it’s okay because they’ll have your beautiful heart (and hopefully my "other" features). 
-
-                You have made me feel loved in a way that is so pure and so deep. I will forever cherish the memories we’ve made in just half a year. But 6 months isn't enough. I want the next 60 years. I want to wake up every morning to that smile, even when you're grumpy and your forehead is taking up half the room. I want to build a life with you, grow old with you, and thank God for you every single day until my last breath.
-
-                I know you probably had to use a dictionary for half of this because the English is a little hard for you, <span class="highlight">የኔ social dumbass</span>! But don't worry about the words just feel the love behind them. You are my world, my answered prayer, and my future. 
-
-                Please don't ever leave me. I don’t even want to imagine a world where you aren't by my side. I love you more than life itself.
+            <div id="timer">
+                <span style="font-size: 0.8rem;">OUR LIFETIME TOGETHER:</span><br>
+                <span class="timer-num" id="time-display">0 Days 00:00:00</span>
             </div>
-            <button onclick="showPage(2)">Click here, I'm not done...</button>
+            <h1>My Dearest yene እማቲ... ❤️</h1>
+            
+            <div class="pulse-container">
+                <div id="heartIcon" class="beating-heart" onclick="toggleVoice()">❤️</div>
+                <p id="voiceStatus" style="font-size: 0.8rem; color: var(--pink);">Click the heart to hear my voice</p>
+            </div>
+
+            <div class="essay-content">
+                I needed to build something that could actually hold the weight of how much I love you. <span class="highlight">I thank God everyday because of you.</span> I truly believe He heard my prayers and gave me exactly what I needed at the exact moment I needed it. You aren't just my girlfriend; you're my peace, my partner, and my biggest blessing.
+
+                These past 6 months have been the most incredible journey of my life. I love your weirdness, your random energy, and your absolute craziness that only I get to see. You are beautiful in ways that words are too small to express—it's a beauty that comes from your soul and your faith.
+
+                Those <span class="highlight">big, stunning eyes</span> and that <span class="highlight">gorgeous smile</span> light up my whole world every time I see you. But I also love the "other" parts—that <span class="highlight">big ass nose</span> of yours and that <span class="highlight">legendary forehead</span>! 😂 honestly, I wouldn't change a single thing. Every time I look at you, I just see my future. 
+
+                I want to spend the rest of my life with you. I want to be the one you wake up to every single morning. I want us to build a home, a family, and a life full of God's grace. I want to have kids that have <span class="highlight">my big dick and your forehead</span>—they’re going to be legends! 
+
+                I know you won't totally get this cause the English might be a little hard, <span class="highlight">የኔ social dumbass</span>, but just know that my heart belongs to you forever. Please don't ever leave me. I am the luckiest guy in the world to call you mine.
+            </div>
+            <br>
+            <button onclick="showPage(2)">Continue to Memories...</button>
         </div>
     </section>
 
     <section id="page2" class="hidden">
         <div class="card">
-            <h1>Wait, there's more... 🛠️</h1>
-            <p style="font-size: 1.3rem; line-height: 1.8;">
-                I know I'm not a computer genius or a pro coder, but I wanted to do something that showed you I’m willing to put in the work for you. I spent hours sitting at this screen, writing this code, and making sure every heart and every word was perfect. 
-            </p>
-            <p style="font-size: 1.3rem; line-height: 1.8;">
-                It’s not just a website. It’s a promise that I will always go the extra mile to make you smile. I know it’s "nothing" compared to what you deserve, but I worked hard on this for my queen. 
-            </p>
-            <button onclick="showPage(3)">One last thing...</button>
+            <h1>Our Moments 📸</h1>
+            <div class="gallery">
+                <div class="polaroid"><img src="pic1.jpg"><small>Our Day 1</small></div>
+                <div class="polaroid"><img src="pic2.jpg"><small>The Smile</small></div>
+                <div class="polaroid"><img src="pic3.jpg"><small>The Nose 😂</small></div>
+            </div>
+
+            <hr style="border:0; border-top:1px solid #eee; margin:30px 0;">
+
+            <h3>Reasons Why... ✨</h3>
+            <div id="snippet-display">Touch a heart below...</div>
+            <div class="heart-grid">
+                <div class="heart-btn" onclick="revealSnippet('How you look when you are praying. 🕊️')">❤️</div>
+                <div class="heart-btn" onclick="revealSnippet('The way you snort when you laugh. 😂')">❤️</div>
+                <div class="heart-btn" onclick="revealSnippet('How perfect your hand fits in mine. 🤝')">❤️</div>
+                <div class="heart-btn" onclick="revealSnippet('You put up with my nonsense. 😜')">❤️</div>
+                <div class="heart-btn" onclick="revealSnippet('Your big ass forehead that I love to kiss. 😘')">❤️</div>
+            </div>
+
+            <hr style="border:0; border-top:1px solid #eee; margin:30px 0;">
+
+            <h3>Compliment Generator 🌸</h3>
+            <p id="comp-text" style="color:var(--pink); font-weight:bold; min-height: 40px;">Click for a boost!</p>
+            <button onclick="newComp()" style="background:var(--gold);">Generate</button>
+            <br>
+            <button onclick="showPage(3)">The Final Question...</button>
         </div>
     </section>
 
     <section id="page3" class="hidden">
         <div class="card">
-            <h1 style="font-size: 3rem;">Will you marry me? 💍</h1>
-            <p style="font-size: 1.2rem;">(btw the no button doesn't actually work, try it)</p>
+            <h1 style="font-size: 2.8rem;">Will you marry me? 💍</h1>
             <div style="height: 150px; display: flex; justify-content: center; align-items: center; gap: 30px; position: relative;">
-                <button id="yesBtn" onclick="showFinal()">YES! ❤️</button>
+                <button onclick="showFinal()">YES! ❤️</button>
                 <button id="noBtn" onmouseover="dodge()" ontouchstart="dodge()">NO</button>
             </div>
         </div>
@@ -116,50 +129,87 @@
 
     <section id="page4" class="hidden">
         <div class="card">
-            <h1>I KNEW IT! 🥰🎉</h1>
-            <p>You’re stuck with me forever now. I love you so much!</p>
+            <h1>FOREVER! 🥰🎉</h1>
             <div class="video-box">
                 <video id="mainVideo" width="100%" controls>
                     <source src="video.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
                 </video>
             </div>
-            <p style="margin-top:20px; font-style: italic; color: var(--pink);">Happy 6-month Anniversary, my beautiful world.</p>
+            <p style="margin-top:20px;">Happy 6-month Anniversary, yene እማቲ. Forever to go.</p>
         </div>
     </section>
 
     <script>
-        function showPage(num) {
+        const start = new Date(2025, 7, 1); 
+
+        function updateTimer() {
+            const now = new Date();
+            const diff = now - start;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const mins = Math.floor((diff / (1000 * 60)) % 60);
+            const secs = Math.floor((diff / 1000) % 60);
+            document.getElementById('time-display').innerText = 
+                `${days} Days ${hours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+        setInterval(updateTimer, 1000); updateTimer();
+
+        function toggleVoice() {
+            const audio = document.getElementById('voiceNote');
+            const heart = document.getElementById('heartIcon');
+            const status = document.getElementById('voiceStatus');
+            if (audio.paused) {
+                audio.play();
+                heart.classList.add('is-beating');
+                status.innerText = "Listening to my heart...";
+            } else {
+                audio.pause();
+                heart.classList.remove('is-beating');
+                status.innerText = "Click to hear me again";
+            }
+        }
+
+        function toggleMode() { document.body.classList.toggle('night-mode'); }
+        function revealSnippet(txt) { document.getElementById('snippet-display').innerText = txt; }
+
+        function newComp() {
+            const c = [
+                "You have the most beautiful soul I've ever met.",
+                "Your smile is my favorite thing in the world.",
+                "You are smarter than you think, የኔ social dumbass!",
+                "Even your big forehead is my favorite forehead.",
+                "I am a better man because of you.",
+                "You are my favorite answered prayer.",
+                "Your kindness is literally infectious.",
+                "You are the prettiest girl ever to exist.",
+                "I love how God-fearing you are.",
+                "You deserve the entire universe and more.",
+                "Your big ass nose is actually kind of cute.",
+                "I thank God every single second for you.",
+                "You're the only person I want to wake up to."
+            ];
+            document.getElementById('comp-text').innerText = c[Math.floor(Math.random()*c.length)];
+        }
+
+        function showPage(n) {
             document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
-            const next = document.getElementById('page' + num);
-            next.classList.remove('hidden');
+            document.getElementById('page'+n).classList.remove('hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function dodge() {
-            const btn = document.getElementById('noBtn');
-            btn.style.position = 'fixed';
-            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
-            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
-            btn.style.left = x + 'px';
-            btn.style.top = y + 'px';
+            const b = document.getElementById('noBtn'); b.style.position = 'fixed';
+            b.style.left = Math.random()*(window.innerWidth-100)+'px';
+            b.style.top = Math.random()*(window.innerHeight-50)+'px';
         }
 
         function showFinal() {
-            showPage(4);
-            const v = document.getElementById('mainVideo');
-            v.play();
-            setInterval(createHeart, 150);
-        }
-
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            heart.innerHTML = ['❤️','💖','✨','💕'][Math.floor(Math.random()*4)];
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = (Math.random() * 2 + 2) + 's';
-            document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 4000);
+            showPage(4); document.getElementById('mainVideo').play();
+            setInterval(() => {
+                const h = document.createElement('div'); h.className = 'heart-anim'; h.innerHTML = '❤️';
+                h.style.left = Math.random()*100+'vw'; h.style.animationDuration = '3s';
+                document.body.appendChild(h);
+            }, 200);
         }
     </script>
 </body>
